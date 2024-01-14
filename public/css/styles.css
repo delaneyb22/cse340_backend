@@ -4,6 +4,13 @@
 *:after {
   box-sizing: border-box;
 }
+:root {
+  --primary-color: #576d81;
+  --secondary-color: #445768;
+  --background-color: #c9d4db;
+  --text-color: #d4d4d4;
+  --border-color: #dcd4dc;
+ }
 
 body {
   font-family: Arial, sans-serif;
@@ -12,8 +19,8 @@ body {
 }
 
 .header {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--primary-color);
+ color: var(--secondary-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +38,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 16px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .product {
@@ -69,6 +78,9 @@ body {
 .review p {
   margin: 0;
 }
+.product, .reviews {
+  border: 1px solid var(--border-color);
+ }
 
 .footer {
   background-color: #333;

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS public.inventory
 	inv_model character varying NOT NULL,
 	inv_year character(4) NOT NULL,
 	inv_description text NOT NULL,
-	inv_image character (4) NOT NULL,
+	inv_image character varying NOT NULL,
 	inv_thumbnail character varying NOT NULL,
 	inv_price numeric(9,0) NOT NULL,
 	inv_miles integer NOT NULL,
@@ -46,3 +46,9 @@ CREATE TABLE IF NOT EXISTS public.account
     account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
+INSERT INTO public.classification (classification_name)
+VALUES ('Custom'),
+('Sport'),
+('SUV'),
+('Truck'),
+('Sedan');

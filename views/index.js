@@ -25,3 +25,23 @@ Util.getNav = async function (req, res, next) {
 }
 
 module.exports = Util
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+};
+
+const formatNumber = (number) => {
+  return new Intl.NumberFormat('en-US').format(number);
+};
+
+exports.createVehicleHtml = (vehicle) => {
+  const vehicleHtml = `
+    <h1>${vehicle.make} ${vehicle.model}</h1>
+    <img src="${vehicle.fullSizeImageUrl}" alt="${vehicle.make} ${vehicle.model}" />
+    <p>Year: ${vehicle.year}</p>
+    <p>Price: ${formatCurrency(vehicle.price)}</p>
+    <p>Mileage: ${formatNumber(vehicle.mileage)}</p>
+    <p>${vehicle.description}</p>
+  `;
+  return vehicleHtml;
+};

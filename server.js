@@ -12,6 +12,22 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const session = require("express-session")
+const pool = require('./database/')
+const cookieParser = require("cookie-parser")
+
+
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
 
 
 /* ***********************
@@ -28,6 +44,8 @@ app.use(static)
 //index route
 app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
+
+app.use(cookieParser())
 
 /* ***********************
  * Local Server Information

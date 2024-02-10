@@ -37,6 +37,7 @@ const formatNumber = (number) => {
 exports.createVehicleHtml = (vehicle) => {
   const vehicleHtml = `
     <h1>${vehicle.make} ${vehicle.model}</h1>
+    <%- messages() %>
     <img src="${vehicle.fullSizeImageUrl}" alt="${vehicle.make} ${vehicle.model}" />
     <p>Year: ${vehicle.year}</p>
     <p>Price: ${formatCurrency(vehicle.price)}</p>

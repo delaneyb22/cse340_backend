@@ -46,3 +46,12 @@ exports.createVehicleHtml = (vehicle) => {
   `;
   return vehicleHtml;
 };
+const { getAllVehicles } = require('../models/inventory-model');
+
+// Use getAllVehicles to retrieve a list of vehicles
+const displayVehicles = async () => {
+  const vehicles = await getAllVehicles();
+};
+
+// Call the async function to display the vehicles
+displayVehicles();

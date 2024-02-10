@@ -1,4 +1,5 @@
 const pool = require("../database")
+const Vehicle = require('/Users/delaneybaker/cse340_backend/models/vehicle-model');
 
 /* ***************************
  *  Get all classification data
@@ -18,8 +19,15 @@ const getVehicleById = async (id) => {
   const vehicle = vehicles.find(vehicle => vehicle.id === id);
   return vehicle;
 };
+const getAllVehicles = async () => {
+  const vehicles = await Vehicle.find();
+  return vehicles;
+};
 
 module.exports = {
   getAllVehicles,
   getVehicleById
 };
+
+
+

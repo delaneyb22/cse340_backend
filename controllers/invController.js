@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../views")
+const Inventory = require('../models/inventory-model');
 
 const invCont = {}
 
@@ -76,3 +77,12 @@ exports.buildVehicleDetailView = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+
+
+const getClassifications = async () => {
+  const classifications = await Inventory.find().distinct('classification');
+  return classifications;
+};
+
+module.exports = { getClassifications, getInventoryByClassificationId };

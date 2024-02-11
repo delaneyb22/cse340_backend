@@ -55,3 +55,12 @@ const displayVehicles = async () => {
 
 // Call the async function to display the vehicles
 displayVehicles();
+
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }

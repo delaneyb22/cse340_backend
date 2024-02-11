@@ -1,0 +1,1 @@
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))

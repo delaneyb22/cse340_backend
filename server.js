@@ -15,6 +15,8 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const session = require("express-session")
 const pool = require('./database/')
 const cookieParser = require("cookie-parser")
+const accountRoutes = require('./routes/accountRoute');
+
 
 
 app.use(session({
@@ -34,6 +36,8 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+app.use('/account', accountRoutes);
 
 
 /* ***********************

@@ -1,9 +1,10 @@
-const express = require("express")
-const router = new express.Router() 
-const invController = require("../controllers/invController")
-router.get("/type/:classificationId", invController.buildByClassificationId);
+const express = require("express");
+const router = new express.Router();
+const invController = require("../controllers/invController");
 
-module.exports = router;
+console.log(invController);
+// Define routes
+router.get("/type/:classificationId", invController.buildByClassificationId);
 
 router.get('/:id', async (req, res) => {
     try {
@@ -17,18 +18,16 @@ router.get('/:id', async (req, res) => {
       console.error(error);
       res.status(500).send('Server error');
     }
-  });
+});
 
-  
-  const errorHandler = (err, req, res, next) => {
+// Define error handler middleware
+const errorHandler = (err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Server error');
-  };
+};
 
-  const invRouter = require('./routes/invRouter');
+// Use error handler middleware
+router.use(errorHandler);
 
-const app = express();
-
-app.use(errorHandler, { handleError: true });
-
-app.use('/inventory', invRouter);
+// Export the router instance
+module.exports = router;

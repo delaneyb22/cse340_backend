@@ -1,13 +1,17 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../views")
 const Inventory = require('../models/inventory-model');
+const { getVehicleById } = require("../models/inventory-model");
+const { createVehicleHtml } = require("../views/index");
 
-const invCont = {}
+
+const invController = {};
 
 /* ***************************
  *  Build inventory by classification view
  * ************************** */
-invCont.buildByClassificationId = async function (req, res, next) {
+invController.buildByClassificationId = async function (req, res, next) {
+  try{
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
   const grid = await utilities.buildClassificationGrid(data)
@@ -17,8 +21,10 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
-  })
-}
+  })}
+  catch{console.error(error);
+    res.status(500).send('Internal Server Error');}
+};
 
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
@@ -41,13 +47,10 @@ async function getInventoryByClassificationId(classification_id) {
 
 
 
-module.exports = invCont
-module.exports = {getClassifications, getInventoryByClassificationId};
 
-const getVehicleById = require("../models/inventory-model").getVehicleById;
-const createVehicleHtml = require("../utils/index").createVehicleHtml;
 
-exports.buildByClassificationId = async (req, res) => {
+
+invController.buildByClassificationId = async (req, res) => {
   async function getInventoryByClassificationId(classification_id) {
     try {
       const data = await pool.query(
@@ -85,4 +88,12 @@ const getClassifications = async () => {
   return classifications;
 };
 
-module.exports = { getClassifications, getInventoryByClassificationId };
+module.exports = {
+  getClassifications,
+  getInventoryByClassificationId,
+  getVehicleById,
+  createVehicleHtml,
+  buildByClassificationId,//error
+  buildVehicleDetailView,
+  invController
+};

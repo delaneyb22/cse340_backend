@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+</head>
+<body>
+    <h1>Inventory Management</h1>
+    <div>
+        <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+            <div>
+                <% messages.forEach(message => { %>
+                    <p><%= message %></p>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+    <div>
+        <a href="/inv/add-classification">Add New Classification</a>
+        <a href="/inv/add-inventory">Add New Inventory</a>
+    </div>
+</body>
+</html>

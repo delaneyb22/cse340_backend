@@ -1,8 +1,8 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../views")
 const Inventory = require('../models/inventory-model');
-const { getVehicleById } = require("../models/inventory-model");
-const { createVehicleHtml } = require("../views/index");
+//const { getVehicleById } = require("../models/inventory-model");
+//const { createVehicleHtml } = require("../views/index");
 
 
 const invController = {};
@@ -11,19 +11,21 @@ const invController = {};
  *  Build inventory by classification view
  * ************************** */
 invController.buildByClassificationId = async function (req, res, next) {
-  try{
-  const classification_id = req.params.classificationId
-  const data = await invModel.getInventoryByClassificationId(classification_id)
-  const grid = await utilities.buildClassificationGrid(data)
-  let nav = await utilities.getNav()
-  const className = data[0].classification_name
-  res.render("./inventory/classification", {
-    title: className + " vehicles",
-    nav,
-    grid,
-  })}
-  catch{console.error(error);
-    res.status(500).send('Internal Server Error');}
+  try {
+    const classification_id = req.params.classificationId;
+    const data = await invModel.getInventoryByClassificationId(classification_id);
+    const grid = await utilities.buildClassificationGrid(data);
+    let nav = await utilities.getNav();
+    const className = data[0].classification_name;
+    res.render("./inventory/classification", {
+      title: className + " vehicles",
+      nav,
+      grid,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
 /* ***************************
@@ -50,22 +52,22 @@ async function getInventoryByClassificationId(classification_id) {
 
 
 
-invController.buildByClassificationId = async (req, res) => {
-  async function getInventoryByClassificationId(classification_id) {
-    try {
-      const data = await pool.query(
-        `SELECT * FROM public.inventory AS i 
-        JOIN public.classification AS c 
-        ON i.classification_id = c.classification_id 
-        WHERE i.classification_id = $1`,
-        [classification_id]
-      )
-      return data.rows
-    } catch (error) {
-      console.error("getclassificationsbyid error " + error)
-    }
-  }
-};
+//invController.buildByClassificationId = async (req, res) => {
+  //async function getInventoryByClassificationId(classification_id) {
+ //   try {
+ //     const data = await pool.query(
+//        `SELECT * FROM public.inventory AS i 
+ //       JOIN public.classification AS c 
+  //      ON i.classification_id = c.classification_id 
+  //      WHERE i.classification_id = $1`,
+ //       [classification_id]
+ //     )
+ //     return data.rows
+ //   } catch (error) {
+ //     console.error("getclassificationsbyid error " + error)
+ //   }
+ // }
+//};
 
 exports.buildVehicleDetailView = async (req, res) => {
   try {

@@ -1,0 +1,14 @@
+<!-- Add Inventory Form -->
+<form action="/inv/add-inventory" method="POST">
+    <label for="make">Make:</label>
+    <input type="text" id="make" name="make" required value="<%= typeof formData !== 'undefined' ? formData.make : '' %>">
+    <!-- Other input fields -->
+    <!-- Dropdown for classification -->
+    <select id="classification" name="classification">
+        <% classifications.forEach(classification => { %>
+            <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
+        <% }) %>
+    </select>
+    <!-- Other input fields -->
+    <button type="submit">Add Inventory</button>
+</form>

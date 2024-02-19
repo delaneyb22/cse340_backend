@@ -1,0 +1,9 @@
+<h2>Welcome <%= client.firstName %></h2>
+
+<% if (client.accountType === 'Employee' || client.accountType === 'Admin') { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/account/update">Update Account Information</a></p>
+<% } %>
+
+<a href="/account/update/<%= client.id %>">Update Account Information</a>
+

@@ -83,3 +83,18 @@ WHERE c.classification_name = 'Sport';
 UPDATE inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
+
+);
+
+
+CREATE TABLE IF NOT EXISTS car_reviews (
+    review_id SERIAL PRIMARY KEY,
+    car_id INT,
+    user_id INT,
+    review_text TEXT,
+    rating INT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (car_id) REFERENCES inventory(inv_id),
+    FOREIGN KEY (user_id) REFERENCES account(account_id)
+);
+INSERT INTO car_reviews (review_text, rating, user_id, car_id) VALUES ('Great car! I love the color!', 5, 1024, 37);

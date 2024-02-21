@@ -1,0 +1,13 @@
+<!-- views/reviews/carReviews.ejs -->
+
+<h1>Reviews for Car</h1>
+<ul>
+    <% reviews.forEach(review => { %>
+    <li>
+        <p><strong>User:</strong> <%= review.user_id %></p>
+        <p><strong>Rating:</strong> <%= review.rating %></p>
+        <p><strong>Review:</strong> <%= review.review_text %></p>
+        <p><strong>Date:</strong> <%= review.timestamp %></p>
+    </li>
+    <% }) %>
+</ul>

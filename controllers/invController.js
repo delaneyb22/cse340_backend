@@ -83,6 +83,20 @@ exports.buildVehicleDetailView = async (req, res) => {
   }
 };
 
+const getVehicleById = async (vehicleId) => {
+  try {
+    const query = {
+      text: 'SELECT * FROM public.inventory WHERE inv_id = $1',
+      values: [vehicleId],
+    };
+
+    const result = await pool.query(query);
+    return result.rows[0]; // Assuming there's only one vehicle with the given ID
+  } catch (error) {
+    console.error('Error retrieving vehicle by ID:', error);
+    throw error;
+  }
+};
 
 
 const getClassifications = async () => {

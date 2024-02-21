@@ -98,3 +98,5 @@ CREATE TABLE IF NOT EXISTS car_reviews (
     FOREIGN KEY (user_id) REFERENCES account(account_id)
 );
 INSERT INTO car_reviews (review_text, rating, user_id, car_id) VALUES ('Great car! I love the color!', 5, 1024, 37);
+
+SELECT * FROM public.inventory WHERE inv_id = $1;
